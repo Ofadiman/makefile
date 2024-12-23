@@ -1,3 +1,6 @@
+# Set environment variables from .env file.
+include .env.public
+
 # The default shell is `/bin/sh` but can be changed using the `SHELL` variable.
 SHELL = /bin/bash
 
@@ -8,6 +11,9 @@ MAKEFLAGS += -s
 FILES = $(wildcard src/*.txt)
 
 MAKE_VAR = I'm from make
+
+# Set environment variable for all shell commands run in the scope of makefile. This variable is not set in the main shell. 
+export FAREWELL = See you around!
 
 # The first target is executed by default, while only `make' is run in the terminal.
 all: pre1 pre2
@@ -38,6 +44,13 @@ automatic_variables: pre1 pre2
 variables:
 	# `SHELL_VAR` is only available in the current context. Next command won't be able to access `SHELL_VAR` value.
 	SHELL_VAR="I'm from shell" && echo "Make variable \"$(MAKE_VAR)\", shell variable \"$$SHELL_VAR\"."
+
+environment_variables:
+	# Environment variables available in current shell are automatically available in make. For example, if I run `export GREETING="Hello, World!"` in the terminal, I can print that environment variable to the console from make.
+	echo "$(GREETING)"
+	echo "$(FAREWELL)"
+	# `PUBLIC` variable is available because it was set by `include .env.public` at the top of the file.
+	echo "$(PUBLIC)"
 
 # `MAKE` is a special variable which allows to make nested make calls with make flags inherited from the main make call.
 nested_make:
