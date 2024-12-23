@@ -8,7 +8,8 @@ SHELL = /bin/bash
 MAKEFLAGS += -s
 
 # Use `*` wild card to search file system for matching filenames.
-FILES = $(wildcard src/*.txt)
+FILES += $(wildcard src/*.txt)
+FILES += $(wildcard tmp/*.txt)
 
 MAKE_VAR = I'm from make
 
