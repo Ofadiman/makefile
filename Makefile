@@ -1,10 +1,11 @@
+# The default shell is `/bin/sh` but can be changed using the `SHELL` variable.
+SHELL = /bin/bash
+
 # This sets the `-s` flag for every make invocation, ensuring that all targets run silently.
-MAKEFLAGS+=-s
+MAKEFLAGS += -s
 
 # Use `*` wild card to search file system for matching filenames.
-FILES := $(wildcard src/*.txt)
-
-.PHONY: all greetings clean variables print automatic_variables pre1 pre2
+FILES = $(wildcard src/*.txt)
 
 # The first target is executed by default, while only `make' is run in the terminal.
 all: pre1 pre2
@@ -18,7 +19,7 @@ pre2:
 greetings:
 	echo "Hello! I hope you're having a fantastic day!" > src/greetings.txt
 
-variables:
+files:
 	echo "FILES: $(FILES)"
 
 # Print out file information about every text file in src directory.
