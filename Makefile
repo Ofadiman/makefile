@@ -39,6 +39,12 @@ variables:
 	# `SHELL_VAR` is only available in the current context. Next command won't be able to access `SHELL_VAR` value.
 	SHELL_VAR="I'm from shell" && echo "Make variable \"$(MAKE_VAR)\", shell variable \"$$SHELL_VAR\"."
 
+# `MAKE` is a special variable which allows to make nested make calls with make flags inherited from the main make call.
+nested_make:
+	$(MAKE) pre1	
+	echo "doing some stuff..."
+	$(MAKE) pre2	
+
 # `clean` is often used as a target that removes the output of other targets.
 clean:
 	rm src/*.txt
