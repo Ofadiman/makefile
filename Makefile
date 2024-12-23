@@ -1,3 +1,6 @@
+# Makes all possible targets in the Makefile non-file targets, ensuring they are always executed regardless of the presence of files with matching names.
+.PHONY: *
+
 # Set environment variables from .env file.
 include .env.public
 
