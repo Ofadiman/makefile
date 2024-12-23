@@ -1,7 +1,10 @@
-.PHONY: all greetings clean variables print automatic_variables pre1 pre2
+# This sets the `-s` flag for every make invocation, ensuring that all targets run silently.
+MAKEFLAGS+=-s
 
 # Use `*` wild card to search file system for matching filenames.
 FILES := $(wildcard src/*.txt)
+
+.PHONY: all greetings clean variables print automatic_variables pre1 pre2
 
 # The first target is executed by default, while only `make' is run in the terminal.
 all: pre1 pre2
