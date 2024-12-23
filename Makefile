@@ -38,6 +38,10 @@ files:
 print: $(FILES)
 	ls -la $?
 
+variables:
+	# `SHELL_VAR` is only available in the current context. Next command won't be able to access `SHELL_VAR` value.
+	SHELL_VAR="I'm from shell" && echo "Make variable \"$(MAKE_VAR)\", shell variable \"$$SHELL_VAR\"."
+
 # All automatic variables are available here https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html but I don't think they are needed.
 automatic_variables: pre1 pre2
 	# The file name of the target of the rule (outputs: automatic_variables).
@@ -45,16 +49,16 @@ automatic_variables: pre1 pre2
 	# The names of all the prerequisites, with spaces between them. (outputs: pre1 pre2).
 	echo $^
 
-variables:
-	# `SHELL_VAR` is only available in the current context. Next command won't be able to access `SHELL_VAR` value.
-	SHELL_VAR="I'm from shell" && echo "Make variable \"$(MAKE_VAR)\", shell variable \"$$SHELL_VAR\"."
-
 environment_variables:
 	# Environment variables available in current shell are automatically available in make. For example, if I run `export GREETING="Hello, World!"` in the terminal, I can print that environment variable to the console from make.
 	echo "$(GREETING)"
 	echo "$(FAREWELL)"
 	# `PUBLIC` variable is available because it was set by `include .env.public` at the top of the file.
 	echo "$(PUBLIC)"
+
+cli_variables:
+	# Variables can be passed as cli arguments using `key=value` pairs syntax (e.g. make cli_variables arg1=first arg2=second).
+	echo "arg1: $(arg1), arg2: $(arg2)"
 
 # `MAKE` is a special variable which allows to make nested make calls with make flags inherited from the main make call.
 nested_make:
