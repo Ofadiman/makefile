@@ -59,6 +59,17 @@ nested_make:
 	echo "doing some stuff..."
 	$(MAKE) pre2	
 
+conditionals:
+ifeq ($(LOG_LEVEL),info)
+	echo "logging informational messages along with warnings and errors"
+else ifeq ($(LOG_LEVEL),warn)
+	echo "logging warnings and errors only"
+else ifeq ($(LOG_LEVEL),error)
+	echo "logging only errors and critical issues"
+else
+	echo "logging is disabled"
+endif
+
 # `clean` is often used as a target that removes the output of other targets.
 clean:
 	rm src/*.txt
