@@ -7,6 +7,8 @@ MAKEFLAGS += -s
 # Use `*` wild card to search file system for matching filenames.
 FILES = $(wildcard src/*.txt)
 
+MAKE_VAR = I'm from make
+
 # The first target is executed by default, while only `make' is run in the terminal.
 all: pre1 pre2
 
@@ -32,6 +34,10 @@ automatic_variables: pre1 pre2
 	echo $@
 	# The names of all the prerequisites, with spaces between them. (outputs: pre1 pre2).
 	echo $^
+
+variables:
+	# `SHELL_VAR` is only available in the current context. Next command won't be able to access `SHELL_VAR` value.
+	SHELL_VAR="I'm from shell" && echo "Make variable \"$(MAKE_VAR)\", shell variable \"$$SHELL_VAR\"."
 
 # `clean` is often used as a target that removes the output of other targets.
 clean:
